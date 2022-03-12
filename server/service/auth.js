@@ -35,17 +35,16 @@ const auth = {
             if (!result) {
               res.send({ status: 404, message: "No user was found" });
             } else {
-              const token = jwt.sign(payload, secret, (err) => {
-                if (err)
-                  res
-                    .send(400)
-                    .send({ status: 400, message: "Cannot generate token" });
-              });
-              res
-                .cookie("token", token, {
-                  httpOnly: true,
-                })
-                .send({ status: 200, ...result });
+              const token = jwt.sign(payload, secret);
+              if (token) {
+                res
+                  .cookie("token", token, {
+                    httpOnly: true,
+                  })
+                  .send({ status: 200, ...result });
+              } else {
+                res.send({ status: 400, message: "cannot generate cookie" });
+              }
             }
           }
         }

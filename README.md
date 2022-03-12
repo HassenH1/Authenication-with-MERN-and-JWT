@@ -1,6 +1,16 @@
-# Authentication Application
+# About The Project
 
 Simple authentication application.
+
+## Build With
+
+- React.js
+- Express
+- Node
+- MongoDB
+- Bootstrap
+
+# Getting Started
 
 ## Installation
 

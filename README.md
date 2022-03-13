@@ -4,7 +4,6 @@ Simple authentication application.
 
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/48224444/158033019-a42e1c77-b35b-44ad-896e-db4773d33527.gif)
 
-
 ## Build With
 
 - React.js
@@ -40,3 +39,9 @@ npm run start
 ```bash
 npm run test
 ```
+
+### TODO
+
+- Finish unit testing
+- Update UI
+- Clean up/modularize code

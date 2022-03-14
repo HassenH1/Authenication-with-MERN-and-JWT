@@ -1,7 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "../components/Button";
+import Container from "../components/Container";
 import useFetch from "../hooks/useFetch";
 import { METHOD, ROUTES } from "../utils/enum";
+import Space from "../components/Space";
 
 /**
  *
@@ -27,20 +30,22 @@ function Dashboard() {
   };
 
   return (
-    <div className="container">
+    <Container>
       <div className="p-5 mb-4 bg-light rounded-3">
-        <div className="container-fluid py-5">
-          <h1 className="display-5 fw-bold">Welcome to Dashboard!</h1>
-          <button
-            className="btn btn-lg btn-primary"
-            type="button"
-            onClick={handleLogout}
-          >
+        <div className="container-fluid py-5 text-center">
+          <h1 className="display-5 fw-bold text-center">
+            Welcome to Dashboard!
+          </h1>
+          <div>
+            <img src={"https://picsum.photos/400"} alt="randomPics" />
+          </div>
+          <Space xxl />
+          <Button onClick={handleLogout} danger>
             Signout
-          </button>
+          </Button>
         </div>
       </div>
-    </div>
+    </Container>
   );
 }
 

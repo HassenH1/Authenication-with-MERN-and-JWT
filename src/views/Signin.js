@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Button from "../components/Button";
+import Container from "../components/Container";
+import Space from "../components/Space";
+import TextInput from "../components/TextInput";
 import { useUser } from "../context/user-context";
 import useFetch from "../hooks/useFetch";
 import { METHOD, ROUTES } from "../utils/enum";
@@ -16,7 +20,6 @@ function Signin() {
   const { user, timedLoginMessage } = useUser();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState("password");
   const [errorMessage, setErrorMessage] = useState("");
   const { fetchRequest } = useFetch();
 
@@ -68,55 +71,32 @@ function Signin() {
   //set password
   const settingPassword = (e) => setPassword(e.target.value);
 
-  //show or hide password in field
-  const showOrHidePassword = (e) =>
-    e.target.checked ? setShowPassword("text") : setShowPassword("password");
-
   return (
-    <div className="container">
+    <Container>
       <div className="p-5 mb-4 bg-light rounded-3">
         <div className="container-fluid py-5">
           <h1 className="display-5 fw-bold text-center">Login</h1>
-          <form onSubmit={handleSubmit} className="m-auto w-25">
-            {user && <p className="text-success">{user}</p>}
-            <div className="form-floating">
-              <input
-                type="text"
-                className="form-control"
-                id="floatingInput"
-                placeholder="username"
-                value={username}
-                onChange={settingUsername}
-              />
-              <label htmlFor="floatingInput">Username</label>
-            </div>
-
-            <div className="form-floating">
-              <input
-                type={showPassword}
-                className="form-control"
-                id="floatingPassword"
-                placeholder="Password"
-                value={password}
-                onChange={settingPassword}
-              />
-              <label htmlFor="floatingPassword">Password</label>
-            </div>
-
-            <div className="checkbox mb-3">
-              <label>
-                <input
-                  type="checkbox"
-                  value="remember-me"
-                  onChange={showOrHidePassword}
-                />{" "}
-                Show Password
-              </label>
-            </div>
-
-            <button className="w-100 btn btn-lg btn-primary" type="submit">
+          <Space l />
+          <div className="m-auto w-25">
+            {user && <p className="text-success text-center">{user}</p>}
+            <TextInput
+              label="Username"
+              placeholder="username"
+              value={username}
+              onChange={settingUsername}
+            />
+            <Space l />
+            <TextInput
+              label="Password"
+              placeholder="password"
+              value={password}
+              onChange={settingPassword}
+              type="password"
+            />
+            <Space l />
+            <Button fullWidth onClick={handleSubmit}>
               Sign in
-            </button>
+            </Button>
 
             {errorMessage && (
               <span className="text-danger">{errorMessage}</span>
@@ -125,10 +105,10 @@ function Signin() {
             <p className="mt-3 mb-3 text-muted">
               Don't have an account? <Link to={"/signup"}>Signup</Link>
             </p>
-          </form>
+          </div>
         </div>
       </div>
-    </div>
+    </Container>
   );
 }
 

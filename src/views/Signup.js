@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Container from "../components/Container";
 import { useUser } from "../context/user-context";
 import useFetch from "../hooks/useFetch";
 import { METHOD, ROUTES } from "../utils/enum";
+import Button from "../components/Button";
+import TextInput from "../components/TextInput";
+import Space from "../components/Space";
 
 /**
  *
@@ -16,7 +20,6 @@ function Signup() {
   const { setUser } = useUser();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState("password");
   const [errorMessage, setErrorMessage] = useState("");
   const { fetchRequest } = useFetch();
 
@@ -30,10 +33,6 @@ function Signup() {
   //set password
   const settingPassword = (e) => setPassword(e.target.value);
 
-  //show or hide password in field
-  const showOrHidePassword = (e) =>
-    e.target.checked ? setShowPassword("text") : setShowPassword("password");
-
   //clear error message
   const clearErrorMessage = () => {
     setTimeout(() => {
@@ -42,7 +41,7 @@ function Signup() {
   };
 
   //check if input fields are filled
-  const fieldValidation = () => {
+  const checkFields = () => {
     if (username.length === 0 || password.length === 0) {
       setErrorMessage("Must fill out both fields");
       return true;
@@ -53,7 +52,7 @@ function Signup() {
   //handle signup on submit
   const handleSignup = async (e) => {
     e.preventDefault();
-    if (fieldValidation()) return;
+    if (checkFields()) return;
     try {
       const resp = await fetchRequest(ROUTES.signup, METHOD.post, {
         username,
@@ -69,49 +68,30 @@ function Signup() {
   };
 
   return (
-    <div className="container">
+    <Container>
       <div className="p-5 mb-4 bg-light rounded-3">
         <div className="container-fluid py-5">
           <h1 className="display-5 fw-bold text-center">Register</h1>
-          <form onSubmit={handleSignup} className="m-auto w-25">
-            <div className="form-floating">
-              <input
-                type="text"
-                className="form-control"
-                id="floatingInput"
-                placeholder="username"
-                value={username}
-                onChange={settingUsername}
-              />
-              <label htmlFor="floatingInput">Username</label>
-            </div>
-
-            <div className="form-floating">
-              <input
-                type={showPassword}
-                className="form-control"
-                id="floatingPassword"
-                placeholder="password"
-                value={password}
-                onChange={settingPassword}
-              />
-              <label htmlFor="floatingPassword">Password</label>
-            </div>
-
-            <div className="checkbox mb-3">
-              <label>
-                <input
-                  type="checkbox"
-                  value="remember-me"
-                  onChange={showOrHidePassword}
-                />{" "}
-                Show Password
-              </label>
-            </div>
-
-            <button className="w-100 btn btn-lg btn-primary" type="submit">
+          <Space l />
+          <div className="m-auto w-25">
+            <TextInput
+              label="Username"
+              placeholder="username"
+              value={username}
+              onChange={settingUsername}
+            />
+            <Space l />
+            <TextInput
+              label="Password"
+              placeholder="password"
+              value={password}
+              onChange={settingPassword}
+              type="password"
+            />
+            <Space l />
+            <Button onClick={handleSignup} fullWidth>
               Sign up
-            </button>
+            </Button>
 
             {errorMessage && (
               <span className="text-danger">{errorMessage}</span>
@@ -120,10 +100,10 @@ function Signup() {
             <p className="mt-3 mb-3 text-muted">
               Don't have an account? <Link to={"/signin"}>Signin</Link>
             </p>
-          </form>
+          </div>
         </div>
       </div>
-    </div>
+    </Container>
   );
 }
 

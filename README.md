@@ -45,3 +45,4 @@ npm run test
 - Finish unit testing
 - Update UI
 - Clean up/modularize code
+- Implement CD

@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "../components/Button";
+import Container from "../components/Container";
 
 /**
  *
@@ -21,7 +23,7 @@ function Home() {
   const navigateToDashboard = () => navigate("user/dashboard");
 
   return (
-    <div className="container">
+    <Container>
       <div className="p-5 mb-4 bg-light rounded-3">
         <div className="container-fluid py-5">
           <h1 className="display-5 fw-bold">JWT Testing Area</h1>
@@ -34,30 +36,12 @@ function Home() {
             Accessing the Dashboard screen.
           </p>{" "}
           <p className="fst-italic">Hint: It won't work unless you login 😉</p>
-          <button
-            onClick={navigateToSignup}
-            className="btn btn-primary btn-lg"
-            type="button"
-          >
-            Sign up
-          </button>{" "}
-          <button
-            onClick={navigateToSignin}
-            className="btn btn-primary btn-lg"
-            type="button"
-          >
-            Sign in
-          </button>{" "}
-          <button
-            onClick={navigateToDashboard}
-            className="btn btn-primary btn-lg"
-            type="button"
-          >
-            Dashboard
-          </button>
+          <Button onClick={navigateToSignup}>Sign up</Button>{" "}
+          <Button onClick={navigateToSignin}>Sign in</Button>{" "}
+          <Button onClick={navigateToDashboard}>Dashboard</Button>{" "}
         </div>
       </div>
-    </div>
+    </Container>
   );
 }
 
